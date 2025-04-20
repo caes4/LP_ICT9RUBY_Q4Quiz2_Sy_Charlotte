@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Grade Evaluation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #0d6efd;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Grade Evaluation</h1>
+        <p>Enter your grades in FIVE of the following subjects: Filipino, English, Science, Math, and Social Studies.</p>
+
+        <!-- Instructions with ontoggle -->
+        <details ontoggle="console.log('Instructions toggled')">
+            <summary>Show Instructions</summary>
+            <p>Input your grades (between 70 and 100), click Submit, and see your average and performance rating.</p>
+        </details>
+
+        <form id="gradeForm" class="mt-4">
+            <div class="mb-3">
+                <label for="subject1" class="form-label">FILIPINO</label>
+                <input type="number" class="form-control" id="subject1" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject2" class="form-label">ENGLISH</label>
+                <input type="number" class="form-control" id="subject2" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject3" class="form-label">MATH</label>
+                <input type="number" class="form-control" id="subject3" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject3" class="form-label">SCIENCE</label>
+                <input type="number" class="form-control" id="subject3" required>
+            </div>
+             <div class="mb-3">
+                <label for="subject3" class="form-label">SOCIAL STUDIES</label>
+                <input type="number" class="form-control" id="subject3" required>
+            </div>
+            <button type="button" class="btn btn-primary w-100" onclick="evaluateGrades()">Submit</button>
+        </form>
+
+        <div class="result mt-3">
+            <p id="averageOutput"></p>
+            <p id="ratingOutput"></p>
+        </div>
+
+        <footer class="text-center mt-4">
+            <p>Source: <a href="https://obmfairviewsis.orangeapps.ph/ob/elearning/grades" target="_blank">Grade Rating System</a></p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function evaluateGrades() {
+            // Get values from input fields
+            let grade1 = parseFloat(document.getElementById('subject1').value);
+            let grade2 = parseFloat(document.getElementById('subject2').value);
+            let grade3 = parseFloat(document.getElementById('subject3').value);
+
+            // Validate input
+            if (isNaN(grade1) || isNaN(grade2) || isNaN(grade3)) {
+                alert("Please enter valid grades for all subjects.");
+                return;
+            }
+
+            // Calculate average using Math methods
+            let average = Math.round(((grade1 + grade2 + grade3) / 3) * 100) / 100;
+
+            // Display average
+            document.getElementById('averageOutput').innerHTML = "Average Grade: " + average;
+
+            // Determine rating using switch with true (emulating range checking)
+            let rating;
+            switch (true) {
+                case (average >= 94 && average <= 100):
+                    rating = "Excellent";
+                    break;
+                case (average >= 87 && average < 94):
+                    rating = "Above Satisfactory";
+                    break;
+                case (average >= 80 && average < 87):
+                    rating = "Satisfactory";
+                    break;
+                case (average >= 75 && average < 80):
+                    rating = "Needs Improvement";
+                    break;
+                case (average >= 70 && average < 75):
+                    rating = "Poor";
+                    break;
+                default:
+                    rating = "Invalid Grade";
+            }
+
+            // Display result
+            document.getElementById('ratingOutput').innerHTML = "Performance Rating: " + rating;
+
+            // Optional: Console log for debugging
+            console.log("Grades entered:", grade1, grade2, grade3, grade4, grade5);
+            console.log("Average:", average, "| Rating:", rating);
+        }
+    </script>
+
+</body>
+</html>
